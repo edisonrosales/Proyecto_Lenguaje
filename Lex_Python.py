@@ -33,7 +33,6 @@ t_TIMES = r'\*'
 t_DIVIDED = r'/'
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
-#t_SYMBOL = r'[a-z]\w*'
 t_SYMBOL = r'[a-zA-Z_][a-zA-Z0-9_]*'
 t_COMILLA_SIMPLE = r"\'"
 t_COMILLA_DOBLE = r'\"'
@@ -48,6 +47,7 @@ t_LEQT = r'<='
 
 
 reserved_words = {
+	'print':'PRINT',
 	'true':'TRUE',
 	'false':'FALSE',
   'and':"AND",

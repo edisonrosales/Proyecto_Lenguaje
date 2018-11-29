@@ -17,44 +17,45 @@ def p_body (p):
             | while
             | if
             | variables
-            | operation_mathematic
-            | operation_logic
-            | operator_arithmetic
     """
 
+
 def p_condicion_FOR (t):
-    """ for : FOR SYMBOL IN RANGE LPAREN NUMBER RPAREN
-                        | FOR SYMBOL IN CORIZ NUMBER COMA NUMBER COMA NUMBER CORDER
-                        | FOR SYMBOL IN RANGE LPAREN NUMBER COMA NUMBER LPAREN
+    """ for : FOR SYMBOL IN RANGE LPAREN NUMBER RPAREN DOBLE_PUNTO instruccion
+                        | FOR SYMBOL IN CORIZ NUMBER COMA NUMBER COMA NUMBER CORDER DOBLE_PUNTO instruccion
+                        | FOR SYMBOL IN RANGE LPAREN NUMBER COMA NUMBER LPAREN DOBLE_PUNTO instruccion
                         """
 
 def p_condition_while (p):
-    """ while : WHILE operation_logic DOBLE_PUNTO variables
+    """ while : WHILE operation_logic DOBLE_PUNTO instruccion
                | WHILE operation_logic DOBLE_PUNTO if
                | WHILE operation_logic DOBLE_PUNTO while"""
 
 def p_condicion_if (p):
-    """ if : IF operation_logic  DOBLE_PUNTO variables
-        | IF operation_logic DOBLE_PUNTO  variables ELSE variables
-        | IF operation_logic DOBLE_PUNTO variables ELIF operation_logic DOBLE_PUNTO variables ELSE variables"""
+    """ if : IF LPAREN operation_logic RPAREN  DOBLE_PUNTO instruccion
+        | IF LPAREN operation_logic RPAREN DOBLE_PUNTO instruccion ELSE instruccion
+        | IF LPAREN operation_logic RPAREN DOBLE_PUNTO instruccion ELIF LPAREN operation_logic RPAREN DOBLE_PUNTO instruccion ELSE DOBLE_PUNTO instruccion"""
+
+def p_instruccion(p):
+    """instruccion : variables
+    | PRINT LPAREN SYMBOL RPAREN"""
 
 def p_variables (p):
     """ variables : SYMBOL EQUAL SYMBOL
     | SYMBOL EQUAL type_number
-    | SYMBOL EQUAL operation_mathematic"""
+    | SYMBOL EQUAL operation_mathematic
+    | SYMBOL EQUAL booleans"""
 
 
 def p_operation_mathematic (p):
     """ operation_mathematic : type_number operator_arithmetic type_number
                               | SYMBOL operator_arithmetic type_number
-
     """
 
 def p_operation_logic (p):
     """operation_logic : operation_log
                     | operation_log  AND operation_logic
                     | operation_log  OR operation_logic
-
     """
 
 
@@ -80,7 +81,8 @@ def p_operator_logic(p):
                  | GT
                  | LT
                  | GEQT
-                 | LEQT """
+                 | LEQT
+                 | EQUAL"""
 
 def p_booleans(p):
     """ booleans : TRUE
